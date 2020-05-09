@@ -1,0 +1,36 @@
+{% extends "doctorbase.html" %}
+{% block title %}Book Appointment{% endblock %}
+{% block head %}
+ <style type="text/css"></style>
+ {% endblock %}
+ {% block javascript%}
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+    
+}
+</script>
+{% endblock %}
+{% block body %}
+<div style="position: relative;top: 72px; padding-bottom: 40px">
+<div class="container-fluid" id="position" style="    height: 120px;
+    width: 100%;
+    background-color: #e23b18;
+    text-align: center;
+    padding-top: 7px;">
+      <a style="color:#08a0ea;font-size: 25px;"  href="/">Home</a>
+      <p style="display: inline-block; color:black; font-size: 25px;">/ Book Doctor</p>
+    </div>
+     <div class="container" style="background-color: cadetblue;margin-bottom: 50px;margin-top: -50px;padding-top: 50px;">
+      <form action="patient" method='post'>{% csrf_token %}
+      <table cellpadding="5px" cellspacing="5px;">
+        <tr><td><input type="text" name='username' placeholder="enter patient username" style="margin:10px;"></td></tr>
+        <tr><td><input type="password" name='password' placeholder="enter password" style="margin:10px;"></td></tr>
+      </table>
+      <input type="submit" name="submit" value="check">
+    </form>
+    <b>{{msg}}</b>
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}MyReport{% endblock %}
+{% block head %}
+ <style type="text/css"></style>
+ {% endblock %}
+ {% block javascript%}
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+    $('#select').change(function(){
+       $('#search1').val("");
+       data($('#search1').val());
+      });
+
+    $('#search1').keyup(function() {
+
+    data($(this).val());
+      
+    });    
+});
+  function data(val){
+            $('#data').text("");
+      if (val.length>=3){
+        $.getJSON('/searchDoctorby', {
+        a: val,
+        b: $("#select").val(),
+      }, function(data) {
+        $('#data').text("");
+        $.each(data.result, function( index, value ) {
+          $('#data').append("<a href='doctor?username="+value[0]+"' style='color:black; text-decoration:none;cursor:pointer;'><div style='border: solid 1px black; background-color:#ccca; float:left; margin:15px; width: 230px'><table style='padding:5px;'><tr><td style='padding-right:10px;'><img src='/static/doctor1.jpg' style=' border-radius: 100%;width: 70px;height: 70px;'></td><td><p>"+value[1]+"&nbsp"+value[2]+"<br/>"+value[9] +"<br/>"+value[7]+" years<br/>"+value[6] +"</p></td></tr></table></div></a>")
+
+});
+          });
+      return false;
+      }
+  }
+  function myFunction(p1, p2) {
+  return p1 * p2;
+}
+</script>
+{% endblock %}
+{% block body %}
+<div style="position: relative;top: 72px; padding-bottom: 40px">
+<div class="container-fluid" id="position" style="    height: 120px;
+    width: 100%;
+    background-color: #e23b18;
+    text-align: center;
+    padding-top: 7px;">
+      <a style="color:#08a0ea;font-size: 25px;"  href="/">Home</a>
+      <p style="display: inline-block; color:black; font-size: 25px;">/ Book Doctor</p>
+    </div>
+     <div class="container" style="background-color: cadetblue;margin-bottom: 50px;margin-top: -50px;padding-top: 50px;">
+      <table >
+      <table >
+        <tr><td><input type="text" name='doctor' id="search1" placeholder="Search Doctor"></td>
+          <td> Search doctor by </td>
+        <td>
+         <select id='select' name="select">
+           <option value='city'>City</option>
+           <option value="name">Name</option>
+           <option value="specialist">Specialist</option>
+         </select> 
+        </td>
+      </tr>
+      </table>
+      <div id="data" style="margin:20px;">
+        
+      </div>
+  </div>
+
+</div>
+
+{% endblock %}

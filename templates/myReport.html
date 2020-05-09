@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}MyReport{% endblock %}
+{% block head %}
+ <style type="text/css"></style>
+ {% endblock %}
+ {% block javascript%}
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+for(var i=0;i<10;i++)
+{
+$("#document").append("<div class='container-fluid' style='margin-top: 20px; float: left;width: 25%; margin-left:20px;background-color:white;height:80px;'><b style='color:red;'>OutPatient</b><br/><b>doctor Name</b><p style='margin:0px;'>Treatment Name</p><p style='margin:0px;'>Date</p>   </div> <div class='container'  style='width: 65%; background-color:white;height:80px; float: right;margin-top: 20px;margin-left: 50px;'><b>Date</b> <br/><p>Treatment Name</p></div>");
+}
+});
+</script>
+{% endblock %}
+{% block body %}
+<div style="position: relative;top: 72px; padding-bottom: 40px">
+<div class="container-fluid" id="position" style="    height: 50px;
+    width: 100%;
+    background-color: #e23b18;
+    text-align: center;
+    padding-top: 7px;">
+      <a style="color:#08a0ea;font-size: 25px;"  href="/">Home</a>
+      <p style="display: inline-block; color:black; font-size: 25px;">/ MyReport</p>
+    </div>
+
+    <div class="container-fluid" style="margin-top: 20px; margin-bottom: 20px;">
+ <div class="container-fluid">
+   <div class="container-fluid" style="float: left;">
+  <h3>MyReport</h3>
+</div>
+  <div class="container-fluid" style="position: relative;top: 20px;     float: right;">
+
+    <b>From</b>
+    <input type="date" value="from" name="from-date">
+    <b>To</b>
+    <input type="date" value="To" name="to-date">
+    <input type="submit" name="search" value="search" style="color:white;background-color:#e23b18;">
+  </div>
+</div>
+  <div id="document" class="container-fluid" style="width: 1100px;background-color:#808080b5;color:black; margin-top: 45px;height: 500px;overflow:auto; margin-bottom: 30px;">
+  </div>
+ </div>
+</div>
+
+{% endblock %}

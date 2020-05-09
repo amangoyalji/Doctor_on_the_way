@@ -1,0 +1,319 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <title>{% block title %}{% endblock %} - My Webpage</title>
+    {% endblock %}
+    <link rel="icon" type="image/gif" href="/static/img_mountains_wide.jpg" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/Slide_Style.css">
+  {% block javascript %}
+  {% endblock %}
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var n=0;
+       var report=0;
+var appointment=0
+var Emergency=0
+
+
+      $(".close").on({
+    mouseenter: function(){
+        $(this).css("background-color", "red");
+        $(this).css("color", "white");
+    }, 
+    mouseleave: function(){
+        $(this).css("background-color", "lavender");
+        $(this).css("color", "black");
+    }, 
+    });
+
+
+      $('#logina').click(function(){
+     alert("shviam");
+      $('#mymodal').modal(hide);
+  // Load up a new modal...
+  $('#myModal').modal('show');
+    });
+    $("#logina").on({
+    mouseenter: function(){
+    
+     
+        $(this).css("color", "blue");
+    }, 
+    mouseleave: function(){
+       
+        $(this).css("color", "black");
+    }, 
+    });
+
+     $("#tag1,#tag2,#tag3,#tag4").on({
+    mouseenter: function(){
+    $(this).css("color", "black");
+    }, 
+    mouseleave: function(){
+       
+        $(this).css("color", "white");
+    }, 
+    });
+
+      $("#myModal").on('show.bs.modal', function () {
+        
+        $("#pageContent").css("opacity","1");
+      });
+
+     $("#shivam").click(function(){
+     // $(this).css("display","none");
+      $("#search_doctor").toggle();
+
+     });
+     var search=0;
+     $("#nav-left").click(function(){
+      search=0;
+      $("#transcript").val("");
+      $("#searchitem").text("");
+      $("#search,#searchTreatment").attr('id','searchDoctor');
+      $("#transcript").attr('placeholder',"Searching The Doctor By City And Name");
+      if(n==0)
+      {
+      $("#suggestion").modal();
+n=n+1;
+    }
+        $("#Arrow-id").css("display","block");
+        $("#Arrow-id").css("left","-750px");  
+        
+    });
+    $("#nav-left1").click(function(){
+      search=1;
+      $("#transcript").val("");
+      $("#searchitem").text("");
+      $("#search,#searchDoctor").attr('id','searchTreatment')
+      $("#transcript").attr('placeholder',"Search Remedies for treatment");
+      {
+      $("#suggestion").modal();
+n=n+1;
+    }
+        $("#Arrow-id").css("display","block");  
+        $("#Arrow-id").css("left","-580px");
+        $("#Arrow-id").css("left","-660px");  
+    });
+    $("#nav-left2").click(function(){
+      search=1;
+      $("#transcript").attr('placeholder',"Search Remedies");
+      {
+      $("#suggestion").modal();
+n=n+1;
+    }
+        $("#Arrow-id").css("display","block");  
+        $("#Arrow-id").css("left","-300px");  
+
+    });
+
+$("#suggestion,#suggestion1").on('hidden.bs.modal', function () {
+            n=0;
+             $("#Arrow-id").css("display","none");  
+
+    });
+$("#mymodal,#myModal").on('hidden.bs.modal', function () {
+            n=0;
+             
+
+    });
+$("#log").click(function(){
+  if(n==0){
+  $("#mymodal").modal({backdrop:"static"});
+  n=n+1;
+}
+});
+$("#sign").click(function(){
+  if(n==0){
+    $("#sign_patient").css("display","block");
+    $("#sign_doctor,#sign_hospital").css("display","none");
+  $("#myModal").modal({backdrop:"static"});
+  n=n+1;
+}
+});
+$("#sign1").click(function(){
+  if(n==0){
+    $("#sign_doctor").css("display","block");
+    $("#sign_patient,#sign_hospital").css("display","none");
+  $("#myModal").modal({backdrop:"static"});
+  n=n+1;
+}
+});
+$("#sign2").click(function(){
+  if(n==0){
+    $("#sign_hospital").css("display","block");
+    $("#sign_doctor,#sign_patient").css("display","none");
+  $("#myModal").modal({backdrop:"static"});
+  n=n+1;
+}
+});
+
+
+ $(".dropdown-toggle").dropdown();
+
+     
+/*$("#myBtn").click(function(){
+ $("#mymodal").on('hidden.bs.modal', function () {
+  $("#myModal").modal({backdrop:"static"});
+     });
+});*/
+ $("#mymodal").on('hidden.bs.modal', function () {
+ report=0;
+ appointment=0;
+ BookDoctor=0
+     });
+$("#book").click(function(){
+    window.open("BookDoctorByDoctor","_self");
+});
+$("#appointment").click(function(){
+    window.open("doctorAppointment","_self");
+});
+$('#search').bind('click', function() {
+      $.getJSON('/searchDoctor', {
+        a: $("#transcript").val(),
+      }, function(data) {
+        $.each(data.result, function( index, value ) {
+      
+          $("#searchitem").append("<a href='shivam' style='margin:20px;'><div style='border: solid 1px black; width: 200px'><table><tr><td><img src='/static/doctor1.jpg' style=' border-radius: 100%;width: 70px;height: 70px;'></td><td><p>"+value[1]+"&nbsp"+value[2]+"<br/>"+value[9] +"<br/>"+value[7]+" years<br/>"+value[6] +"</p></td></tr></table></div></a>");
+});
+      });
+      return false;
+    });
+$('#searchTreatment').bind('click', function() {
+      $.getJSON('/searchTreatment', {
+        a: $("#transcript").val(),
+      }, function(data) {
+        $("#searchitem").text(data.result);
+      });
+      return false;
+    });
+$('#logout').bind('click', function() {
+      $.getJSON('/logout', function(data) {
+        alert(data.result);
+        location.reload(true);
+      });
+      return false;
+      
+    });
+
+$('#buuton3').bind('click', function() {
+      $.getJSON('/search_remedies', {
+        a: $('input[name="text"]').val(),
+      }, function(data) {
+        $("#client1").append(data.result);
+      });
+      return false;
+    });
+         $(".search1").click(function(){
+          alert("serahc");
+         });
+         $("#start").click(function(){
+          $("#container").slideToggle();
+         });
+
+});
+  </script>
+  </head>
+  <article>
+  <nav class="navbar " data-spy="affix" style="margin-bottom: 0px;  background-color:#ccc;">
+    <div class="container-fluid">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+          <a class="navbar-brand" href="#" style="font-size: 25px; margin-left: 100px; margin-right: 50px;">Doctor On The Way</a>
+      </div>
+     <div class="collapse navbar-collapse"  id="myNavbar">
+      <ul class="nav navbar-nav" style="margin-left: 8px;">
+        <li id="nav-left"  ><a style="padding-top: 25px; padding-bottom: 25px;" >Doctors</a></li>
+        
+        <li id="nav-left1"><a style="padding-top: 25px; padding-bottom: 25px;" >Treatment</a></li>
+       </ul>
+         <ul class="nav navbar-nav " style="margin-left: 75px; margin-top: 5px;">
+         <li style="top:10px; "><button id="book" style="font-size: 15px;color: #F44336;background-color:#F44336; color:white ; margin-right: 20px;" class="btn btn-default">Book Appointment</button></li>
+          <li style="top:10px; "><button id="appointment" style="font-size: 15px;color: #F44336;background-color:#F44336; color:white ;" class="btn btn-default">My Appointment</button></li>
+       </ul>
+      <ul class="nav navbar-nav navbar-right" id="after-sign">
+         <li class="dropdown">
+          <a  style="padding-top: 25px; padding-bottom: 25px;" class="dropdown-toggle" data-toggle="dropdown" href="#">UserName <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/doctorProfile">Profile</a></li>
+            <li><a href="#">ForgetPassword</a></li>
+            <li><a href="#">All Transaction</a></li>
+             <li><a id="logout" style="cursor: pointer;">LogOut</a></li>
+          </ul>
+        </li>
+      </ul>
+        
+      <i class='arrow up' id="Arrow-id" style='font-size: 10px; width: 30px; height: 30px; background-color: lavender; top: 56px; border: solid; border-width: 1px 0 0 1px; border-color: red; transform: rotate(45deg); position: relative; left: -150px; display: none; '></i>
+    </div>
+  </div>
+</nav>
+</article>
+  <body>
+    <div id="content">{% block body %}{% endblock %}</div>
+  </body>
+  <!--suggestion tag-->
+   <div class="modal slide" id="suggestion" role="dialog" style="top:42px;">
+    <div class="modal-dialog" style="margin-left: 125px; width: 1010px;">
+    
+      <!-- Modal content-->
+      <div class="modal-content"id="check1"style="border-radius: 0px; padding: 120px; border-top-color: red; ">
+  <div class="speech">
+    <input type="search" name="search" id="transcript"  placeholder="speak for search" style="
+    width: 600px;
+    padding: 15px;" />
+    <i class="fa fa-microphone search" style="font-size: 30px;
+    color: black;
+    margin-left: px;
+    left: -170px;
+    top: 10px;
+    /* border: solid 1px black; */
+    padding: 10px;
+    position: relative;" onclick="startDictation()"></i>
+    <button id="search">submit</button>
+  </div>
+  <div >
+    <table id="searchitem">
+    </table>
+  </div>
+
+<!-- HTML5 Speech Recognition API -->
+
+      </div>
+      
+    </div>
+ </div>
+  <!--sign in page-->
+<!--suggestion-->
+<!--footer of the page-->
+   <div   style="background-image:url('/static/logo.jpg'); height:400px;background-size: 100%">
+    <div class="container-fluid" style="     height: inherit;text-align: center;   background-color: #1f1c1cad;color: white;">
+    <h1 style="top: 50px;position: relative;">Give it a try before your commit</h1>
+    <h4 style="top: 70px;position: relative;">You can test drive before deciding on one of plans .Just give us your<br/> email address, and we'lsend you the details.</h4>
+    </div>
+  </div>
+  <footer style="    background: #2196F3;font-size: 15px;height: 70px;">
+    <a href="" id="footer-main">ABOUT</a>
+    <a href="" id="footer-main">CONTACT US</a>
+    <a href="" id="footer-main">PRIVACY POLICY</a>
+    <a href="" id="footer-main">TERMS</a>
+    <div style="margin-right: 20px;float: right; top: 15px; position: relative;" >
+        <a href="#"  title="Twitter"><i id="tag1" style="color: white;" class="fa fa-twitter"></i></a>
+        <a href="#"  title="Google"><i id="tag1" style="color: white;" class="fa fa-google"></i></a>
+        <a href="#"  title="Facebook"><i id="tag1" style="color: white;"  class="fa fa-facebook"></i></a>
+        <a href="#"  title="Dribble"><i id="tag1" style="color: white;" class="fa fa-dribbble"></i></a> 
+    </div>
+  </footer>
+</html>

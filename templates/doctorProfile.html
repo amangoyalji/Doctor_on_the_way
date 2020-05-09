@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}MyReport{% endblock %}
+{% block head %}
+ <style type="text/css"></style>
+ {% endblock %}
+ {% block javascript%}
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+    var dtToday = new Date();
+    minDate = dtToday.toISOString().substring(0,10);
+    $('#date').attr('min', minDate);
+    dtToday.setDate(dtToday.getDate() + 7);
+    maxDate = dtToday.toISOString().substring(0,10);
+    $('#date').attr('max', maxDate);
+    $('#date').click(function(){
+      $('#token').css('display','block');
+    });
+
+ 		for(i=1;i<=40;i++){
+
+ 			$('#token').append("<div id="+i+" style='height:30px; width:30px; background-color:#ccca; cursor:pointer; float:left; margin:5px;' title='"+i+"' ></div>")
+ 		}
+ 		var i;
+    $('#token div').click(function(){
+    	$('#token div').css('background-color','#ccca');
+    	$(this).css('background-color','green');
+    	i=$(this).attr("title");
+    });
+    $("#book").click(function(){
+    	$.getJSON('/doctor_book', {
+        specialist:'{{specialist}}',
+        name: '{{fname}} {{lname}}',
+        adate: $('#date').val(),
+        bdate: minDate,
+        token: i,
+        place : '{{place}}'
+    }, function(data) {
+        alert('Book Successfully');
+          });
+});
+    });
+</script>
+{% endblock %}
+{% block body %}
+<div style="position: relative;top: 72px; padding-bottom: 40px">
+
+  <div class="container" style="background-color: cadetblue;margin-bottom: 50px;margin-top: -50px;padding-top: 50px;">
+  	<table>
+  		<tr>
+  			<td style="padding-right: 50px;">
+  				<img src='/static/doctor1.jpg' style=' border-radius: 100%;width: 170px;height: 170px;'>
+  			</td>
+  			<td>
+  				<h3 id='doctor_name'>{{fname}} {{lname}}</h3>
+  				<h3>{{username}} years Experince</h3>
+  				<h3 id='specialist'>{{specialist}} </h3>
+  				<h3>{{username}} </h3>
+  			</td>
+  		</tr>
+  	</table>
+      <div style="margin:20px;">
+          <input type="date" name="date" id='date'>
+      </div>
+      <table>
+      	<tr>
+      		<td>
+      			 <div id='token' style="width: 400px; left: 50px; position: relative; display: none;"></div>
+      		</td>
+      		<td>
+      			 <div style="left: 150px; position: relative;">
+      	<button id='book'>Book</button>
+      </div>
+      		</td>
+      	</tr>
+      </table>
+  </div>
+
+</div>
+
+{% endblock %}

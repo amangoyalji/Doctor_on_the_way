@@ -1,0 +1,41 @@
+
+{% extends "base.html" %}
+{% block title %}MyReport{% endblock %}
+{% block head %}
+ <style type="text/css"></style>
+ {% endblock %}
+ {% block javascript%}
+ <script type="text/javascript">
+  $(document).ready(function(){
+
+});
+</script>
+{% endblock %}
+{% block body %}
+
+
+<div style="position: relative;top: 72px; padding-bottom: 40px">
+   <div class="container" style="background-color: cadetblue;margin-bottom: 50px;margin-top: -50px;padding-top: 50px;">
+<table border="solid 1px black" cellpadding="15px" cellspacing="15px" style="margin:20px;">
+  <tr>
+    <td><b style="padding: 20px;margin: 10px;font-size: 16px;">Book date</b></td>
+    <td><b style="padding: 20px;margin: 10px;font-size: 16px;">Appointment date</td>
+    <td><b style="padding: 20px;margin: 10px;font-size: 16px;">Doctor Name</b></td>
+    <td><b style="padding: 20px;margin: 10px;font-size: 16px;">Places</b></td>
+    <td><b style="padding: 20px;margin: 10px;font-size: 16px;">Token No.</b></td>
+    <td><b style="padding: 20px;margin: 10px;font-size: 16px;">Treatment</b></td>
+  </tr>
+{%  for record in result %}
+    <tr>
+    <td><b style="padding: 20px;margin: 10px;font-size: 16px;">{{record.2}}</b></td>
+    <td><b style="padding: 20px;margin: 10px;font-size: 16px;">{{record.3}}</td>
+    <td><b style="padding: 20px;margin: 10px;font-size: 16px;">{{record.4}}</b></td>
+    <td><b style="padding: 20px;margin: 10px;font-size: 16px;">{{record.5}}</b></td>
+    <td><b style="padding: 20px;margin: 10px;font-size: 16px;">{{record.6}}</b></td>
+    <td><b style="padding: 20px;margin: 10px;font-size: 16px;">{{record.7}}</b></td>
+  </tr>
+    {% endfor %}
+</table>
+</div>
+</div>
+{% endblock %}
